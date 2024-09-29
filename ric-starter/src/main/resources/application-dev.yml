@@ -1,0 +1,67 @@
+# 数据源配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.6.101:3306/uniubi_construction?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: PV8NQ@RSkVHZ
+    druid:
+      # 初始化时建立物理连接的个数
+      initial-size: 5
+      # 最小链接池数量
+      min-idle: 5
+      # 最大连接池数量（缺省值：8）
+      max-active: 20
+      # 获取连接时最大等待时间，单位毫秒。
+      max-wait: 60000
+      # 检查空闲连接的频率，单位毫秒, 非正整数时表示不进行检查
+      time-between-eviction-runs-millis: 60000
+      #池中某个连接的空闲时长达到 N 毫秒后, 连接池在下次检查空闲连接时，将回收该连接,要小于防火墙超时设置
+      min-evictable-idle-time-millis: 30000
+      #检查池中的连接是否仍可用的 SQL 语句,drui会连接到数据库执行该SQL, 如果正常返回，则表示连接可用，否则表示连接不可用
+      validation-query: SELECT 1 FROM jpa
+      #当程序请求连接，池在分配连接时，是否先检查该连接是否有效。(高效)
+      test-while-idle: true
+      #程序申请连接时,进行连接有效性检查（低效，影响性能）
+      test-on-borrow: false
+      #程序返还连接时,进行连接有效性检查（低效，影响性能）
+      test-on-return: false
+      #缓存通过以下两个方法发起的SQL:	true
+      # 	public PreparedStatement prepareStatement(String sql)
+      # 	public PreparedStatement prepareStatement(String sql,int resultSetType, int resultSetConcurrency)
+      pool-prepared-statements: true
+      #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      #每个连接最多缓存多少个SQL
+      max-pool-prepared-statement-per-connection-size: 20
+      #	监控统计: filter:stat
+      # 防御SQL注入: filter:wall
+      filters: stat,wall
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      #连接属性。比如设置一些连接池统计方面的配置。
+      #druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 比如设置一些数据库连接属性:
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+#logging:
+#  level:
+#    com:
+#      uniubi:
+#        cloud:
+#          funx:
+#            core:
+#              dal:
+#                dao: DEBUG
+
+# qianji Starter
+# redis相关配置
+#sponge:
+#  redis:
+#    host: 192.168.6.101
+#    port: 6379
+#    timeout: 6000
+#    max-idle: 10
+#    max-total: 20
+#    max-wait: -1
+#    password: PV8NQ@RSkVHZ
